@@ -60,7 +60,7 @@ class adc0832():
 
         if dat1 == dat2:
             if prct == True:
-                res = (dat1/255)*100
+                res = int((dat1/255)*100)
             else:
                 res = dat1
             return res
