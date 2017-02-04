@@ -8,10 +8,10 @@ GPIO BCM: I/O (5/6) to GPIO 16, CS (1) to GPIO 21, CLK (7) TO GPIO 20
 
 class adc0832():
     def __init__(self):
-        self.setup()
         self.ADC_CS = 21
         self.ADC_CLK = 20
         self.ADC_DIO = 16
+        self.setup()
 
     def setup(self):
         GPIO.setwarnings(False)
@@ -22,7 +22,7 @@ class adc0832():
     def destroy(self):
         GPIO.cleanup()
 
-    def read_result(self):
+    def read_result(self,prct = False):
         GPIO.setup(self.ADC_DIO, GPIO.OUT)
         GPIO.output(self.ADC_CS, 0)
 
@@ -59,6 +59,10 @@ class adc0832():
         GPIO.setup(self.ADC_DIO, GPIO.OUT)
 
         if dat1 == dat2:
-            return dat1
+            if prct == True:
+                res = (dat1/255)*100
+            else:
+                res = dat1
+            return res
         else:
             return 0
