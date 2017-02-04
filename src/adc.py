@@ -8,11 +8,11 @@ GPIO BCM: I/O (5/6) to GPIO 16, CS (1) to GPIO 21, CLK (7) TO GPIO 20
 
 class adc0832():
     def __init__(self):
-        self.setup()
         self.ADC_CS = 21
         self.ADC_CLK = 20
         self.ADC_DIO = 16
-
+        self.setup()
+        
     def setup(self):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)    #Number GPIOs by its physical location
