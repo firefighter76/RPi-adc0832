@@ -12,7 +12,7 @@ class adc0832():
         self.ADC_CLK = 20
         self.ADC_DIO = 16
         self.setup()
-        
+
     def setup(self):
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)    #Number GPIOs by its physical location
@@ -22,7 +22,7 @@ class adc0832():
     def destroy(self):
         GPIO.cleanup()
 
-    def read_result(self):
+    def read_result(self,prct = False):
         GPIO.setup(self.ADC_DIO, GPIO.OUT)
         GPIO.output(self.ADC_CS, 0)
 
@@ -59,6 +59,10 @@ class adc0832():
         GPIO.setup(self.ADC_DIO, GPIO.OUT)
 
         if dat1 == dat2:
-            return dat1
+            if prct == True:
+                res = (dat1/255)*100
+            else:
+                res = dat1
+            return res
         else:
             return 0
